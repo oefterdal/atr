@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            function compute() {
+                var atr = $('#atr').val() * 4;
+                var atr_2 = atr * 2;
+                var atr_3 = atr * 3;
+                var account_size = $('#account-size').val();
+                var risk_percentage = $('#risk-percentage').val() / 100;
+                var total_risk = account_size * risk_percentage;
+                $('#risk-result').val(total_risk);
+                var contract_size_1 = (total_risk / atr).toFixed(2);
+                var contract_size_2 = (total_risk / atr_2).toFixed(2);
+                var contract_size_3 = (total_risk / atr_3).toFixed(2);
+                $('#contract-size-1').val(contract_size_1);
+                $('#contract-size-2').val(contract_size_2);
+                $('#contract-size-3').val(contract_size_3);
+            }
+            $('#account-size, #risk-percentage, #atr').change(compute);
+        });
+    </script>
+    <title>ATR Position Size Calculator</title>
+</head>
+
+<body>
+    <div data-role="page" id="atr-risk-calculator">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">ATR Position Size Calculator</h1>
+                <p class="lead">*Input your current ATR, Account Size, and desired Risk%</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h2>Micro Futures</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="atr">ATR</label>
+                            <input class="form-control" type="number" id="atr" name="atr" placeholder="19.14">
+                        </div>
+                        <div class="form-group">
+                            <label for="account-size">Account Size</label>
+                            <input class="form-control" type="text" placeholder="25000" id="account-size"
+                                name="account-size">
+                        </div>
+                        <div class="form-group">
+                            <label for="risk-percentage">Risk %</label>
+                            <input class="form-control" placeholder="1" type="number" min="0" max="100"
+                                id="risk-percentage" name="risk-percentage">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="background-color: transparent; border: none;"
+                                id="inputGroup-sizing-default">$ RISK</span>
+                        </div>
+                        <input class="form-control" aria-label="Large"
+                            style="background-color: transparent; border: none;" type="text" name="risk-result"
+                            id="risk-result" value="0" readonly disabled />
+                    </div>
+
+                    <label for="contract-size">Contract Size</label><br>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-danger">
+                            <div class="input-group-prepend">
+                                <span>ATR-1</span>
+                            </div>
+                            <input class="form-control" style="background: transparent; border: none;" type="number"
+                                name="contract-size-1" id="contract-size-1" value="0" readonly disabled />
+                        </li>
+
+                        <li class="list-group-item list-group-item-warning">
+                            <div class="input-group-prepend">
+                                <span>ATR-2</span>
+                            </div>
+                            <input class="form-control" style="background: transparent; border: none;" type="number"
+                                name="contract-size-2" id="contract-size-2" value="0" readonly disabled />
+                        </li>
+                        <li class="list-group-item list-group-item-success">
+                            <div class="input-group-prepend">
+                                <span>ATR-1</span>
+                            </div>
+                            <input class="form-control account-size" style="background: transparent; border: none;"
+                                type="number" name="contract-size-3" id="contract-size-3" value="0" readonly disabled />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
